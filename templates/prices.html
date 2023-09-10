@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if notfound %}
+  <h3>{{ notfound }}</h3>
+  <img src="{% static 'images/search.jpg' %}" alt="here" height="500" width="850">
+{% else %}
+    {% if crypto.Response %}
+    <h4>There is no data for <mark><i>{{ quote }}</i></mark>, Please Try Again....</h4>
+    {% endif %}
+
+    {% for key,value in crypto.DISPLAY.items %}
+      <div class="jumbotron">
+        <h1 class="display-4">{{ key }}</h1>
+              <strong>Name</strong> : {{ key }}<br>
+              <strong>Price</strong> : {{value.USD.PRICE}}<br>
+              <strong>Day High</strong> : {{ value.USD.HIGHDAY }}<br>
+              <strong>Day Low</strong> : {{ value.USD.LOWDAY }}<br>
+              <strong>Market Cap</strong> : {{ value.USD.MKTCAP }}<br>
+      </div>
+  {% endfor %}
+{% endif %}
+{% endblock %}
